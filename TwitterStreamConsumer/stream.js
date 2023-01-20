@@ -50,7 +50,7 @@ const streamTweets = (tweetEmitter) => {
       });
   } catch (e) {
     console.error("Stream conneciton issue");
-    reconnect(tweetEmmiter);
+    reconnect(tweetEmitter);
   }
 };
 
