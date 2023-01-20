@@ -1,17 +1,25 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+require("dotenv").config();
+const request = require("request");
+const util = require("util");
 
-import axios from "axios";
+const post = util.promisify(request.post);
+const get = util.promisify(request.get);
+
 const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
-axios.defaults.baseURL = "https://api.twitter.com/2/tweets/search/stream/rules";
-axios.defaults.headers.common["Authorization"] = `Bearer ${BEARER_TOKEN}`;
-axios.defaults.headers.post["Content-Type"] = "application/json";
+const BASE_URL = "https://api.twitter.com/2/tweets/search/stream/rules";
 
 // Create rules
-const post = (rules) => {
-  console.log("rules", rules);
-  return axios
-    .post("", rules)
+const createRule = (rules) => {
+  const requestConfig = {
+    url: BASE_URL,
+    auth: {
+      bearer: BEARER_TOKEN,
+    },
+    json: {
+      add: rules,
+    },
+  };
+  return post(requestConfig)
     .then((resp) => {
       console.log(resp.data);
     })
@@ -22,8 +30,15 @@ const post = (rules) => {
 };
 
 // Get rules
-const get = () => {
-  return axios.get().then((resp) => {
+const getRule = () => {
+  const requestConfig = {
+    url: BASE_URL,
+    auth: {
+      bearer: BEARER_TOKEN,
+    },
+    json: true,
+  };
+  return get(requestConfig).then((resp) => {
     const data = resp.data.data;
     console.log(data);
     return data;
@@ -31,20 +46,25 @@ const get = () => {
 };
 
 // Delete rules
-const remove = (ids) => {
-  return axios
-    .post("", {
+const deleteRule = (ids) => {
+  const requestConfig = {
+    url: BASE_URL,
+    auth: {
+      bearer: BEARER_TOKEN,
+    },
+    json: {
       delete: {
         ids: ids,
       },
-    })
-    .catch((err) => {
-      console.error("Error deleting");
-      console.error(err);
-    });
+    },
+  };
+  return post(requestConfig).catch((err) => {
+    console.error("Error deleting");
+    console.error(err);
+  });
 };
 
-const removeAll = async () => {
+const deleteAllRules = async () => {
   const rules = await get();
 
   if (!rules) return;
@@ -53,7 +73,9 @@ const removeAll = async () => {
   remove(ruleIds);
 };
 
-post({ add: [{ value: "#buildinpublic" }] });
-// remove(["1616476427402022912"]);
-// get();
-// removeAll();
+module.exports = {
+  createRule,
+  getRule,
+  deleteRule,
+  deleteAllRules,
+};
