@@ -22,8 +22,15 @@ git clone https://github.com/bhancockio/TweetCommitDMBot.git
 cd TweetCommitDMBot/TwitterStreamConsumer
 yarn
 
-
 EOF
 
+# Install script
 chown ubuntu:ubuntu /tmp/subscript.sh && chmod a+x /tmp/subscript.sh
 sleep 1; su - ubuntu -c "/tmp/subscript.sh"
+
+# Setup Twitter Stream Consumer Service
+export TWITTER_CODE="/home/ubuntu/TweetCommitDMBot/TwitterStreamConsumer"
+export TWITTER_SERVICE_FILE="twitter_stream_consumer.service"
+chmod +x ${TWITTER_CODE}/index.js
+cp ${TWITTER_CODE}/scripts/${TWITTER_SERVICE_FILE} /etc/systemd/system/${TWITTER_SERVICE_FILE}
+systemctl enable ${TWITTER_SERVICE_FILE}

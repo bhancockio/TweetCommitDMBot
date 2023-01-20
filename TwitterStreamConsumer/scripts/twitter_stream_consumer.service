@@ -1,0 +1,10 @@
+[Unit]
+Description=Twitter Stream Consumer
+
+[Service]
+Restart=always
+KillSignal=SIGQUIT
+WorkingDirectory=/home/ubuntu/TweetCommitDMBot/TwitterStreamConsumer/
+ExecStart=/home/ubuntu/TweetCommitDMBot/TwitterStreamConsumer/index.js
+[Install]
+WantedBy=multi-user.target
