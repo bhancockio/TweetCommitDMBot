@@ -34,3 +34,6 @@ export TWITTER_SERVICE_FILE="twitter_stream_consumer.service"
 chmod +x ${TWITTER_CODE}/index.js
 sudo cp ${TWITTER_CODE}/scripts/${TWITTER_SERVICE_FILE} /etc/systemd/system/${TWITTER_SERVICE_FILE}
 sudo systemctl enable ${TWITTER_SERVICE_FILE}
+
+# TODO: LOAD YOUR .ENV FILE 
+# TODO: sudo systemctl start twitter_stream_consumer.service
