@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-/** index.js  */
 const { streamTweets } = require("./stream");
 const events = require("events");
 

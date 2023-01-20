@@ -49,7 +49,9 @@ const streamTweets = (tweetEmitter) => {
         reconnect(tweetEmmiter, stream);
       });
   } catch (e) {
-    console.error("Stream conneciton issue");
+    console.error(
+      "Stream conneciton issue. Most likely an authentication issue."
+    );
     reconnect(tweetEmitter);
   }
 };

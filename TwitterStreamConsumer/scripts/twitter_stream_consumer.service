@@ -1,10 +1,12 @@
 [Unit]
 Description=Twitter Stream Consumer
-
 [Service]
+# Start Service and Examples
+WorkingDirectory=/home/ubuntu/TweetCommitDMBot/TwitterStreamConsumer
+ExecStart=/home/ubuntu/.nvm/versions/node/v18.13.0/bin/node index.js
+RestartSec=10
 Restart=always
-KillSignal=SIGQUIT
-WorkingDirectory=/home/ubuntu/TweetCommitDMBot/TwitterStreamConsumer/
-ExecStart=/home/ubuntu/TweetCommitDMBot/TwitterStreamConsumer/index.js
+# Output to syslog
+SyslogIdentifier=twitter-stream-consumer
 [Install]
 WantedBy=multi-user.target
