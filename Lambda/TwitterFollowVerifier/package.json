@@ -1,0 +1,8 @@
+{
+  "name": "twitter-follow-verifier",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.2.3",
+    "dotenv": "^16.0.3"
+  }
+}

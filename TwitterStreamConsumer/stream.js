@@ -6,7 +6,8 @@ require("dotenv").config();
 
 const request = require("request");
 const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
-const streamURL = "https://api.twitter.com/2/tweets/search/stream";
+const streamURL =
+  "https://api.twitter.com/2/tweets/search/stream?expansions=author_id";
 const config = {
   url: streamURL,
   auth: {
