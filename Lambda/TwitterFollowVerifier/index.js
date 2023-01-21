@@ -28,8 +28,8 @@ export const handler = async (tweet) => {
     };
   }
 
-  const myUserID = "1453842943580811267";
-  const followers = await followersFor(myUserID);
+  const myUserID = process.env.TWITTER_USER_ID;
+  const followers = await getAllFollowersForUser(myUserID);
 
   // Check for follower issues
   if (followers.length === 0) {
