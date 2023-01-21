@@ -1,6 +1,10 @@
 {
   "name": "twitter-follow-verifier",
   "type": "module",
+  "scripts": {
+    "zip": "zip -r TwitterFollowVerifier.zip .",
+    "deploy": "aws lambda update-function-code --function-name TwitterFollowVerifier --zip-file fileb://TwitterFollowVerifier.zip"
+  },
   "dependencies": {
     "axios": "^1.2.3",
     "dotenv": "^16.0.3"
