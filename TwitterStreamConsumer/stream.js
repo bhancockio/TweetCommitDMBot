@@ -47,7 +47,7 @@ const streamTweets = (tweetEmitter) => {
       .on("error", (err) => {
         console.error("Stream Error");
         console.error(err);
-        reconnect(tweetEmmiter, stream);
+        reconnect(tweetEmitter, stream);
       });
   } catch (e) {
     console.error(
