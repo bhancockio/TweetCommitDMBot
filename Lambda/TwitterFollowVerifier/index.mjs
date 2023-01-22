@@ -1,5 +1,7 @@
 import {} from "dotenv/config";
 import axios from "axios";
+import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
+const sqsClient = new SQSClient({ region: "us-east-1" });
 
 axios.defaults.baseURL = "https://api.twitter.com/2";
 axios.defaults.headers.common = {
@@ -46,10 +48,34 @@ export const handler = async (tweet) => {
     };
   }
 
-  return {
-    statusCode: 200,
-    body: tweet,
-  };
+  try {
+    const sqsMessageParams = {
+      DelaySeconds: 10,
+      MessageBody: JSON.stringify(tweet),
+      QueueUrl:
+        "https://sqs.us-east-1.amazonaws.com/703867534834/TweetCommit-VerifiedFollowers",
+    };
+    const data = await sqsClient.send(new SendMessageCommand(sqsMessageParams));
+    if (data) {
+      return {
+        statusCode: 200,
+        body: "Successfully processed tweet",
+      };
+    } else {
+      console.error("Error posting tweet to queue");
+      return {
+        statusCode: 500,
+        body: "Error posting tweet to queue",
+      };
+    }
+  } catch (e) {
+    console.error("Error posting tweet to queue");
+    console.error(e);
+    return {
+      statusCode: 500,
+      body: "Error posting tweet to queue",
+    };
+  }
 };
 
 const isValidTweet = (tweet) => {
