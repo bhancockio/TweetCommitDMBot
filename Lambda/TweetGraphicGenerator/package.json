@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "zip": "zip -r TweetGraphicGenerator.zip .",
+    "deploy": "aws lambda update-function-code --function-name TweetGraphicGenerator --zip-file fileb://TweetGraphicGenerator.zip"
+  },
+  "dependencies": {
+    "canvas": "^2.11.0"
+  }
+}

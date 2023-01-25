@@ -3,7 +3,7 @@ const events = require("events");
 const axios = require("axios").default;
 
 axios.defaults.baseURL =
-  "https://i8l5k0a41h.execute-api.us-east-1.amazonaws.com/development/tweet";
+  "https://i8l5k0a41h.execute-api.us-east-1.amazonaws.com/prod/tweet";
 
 const tweetEmitter = new events.EventEmitter();
 streamTweets(tweetEmitter);

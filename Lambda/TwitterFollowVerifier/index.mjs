@@ -50,7 +50,6 @@ export const handler = async (tweet) => {
 
   try {
     const sqsMessageParams = {
-      DelaySeconds: 10,
       MessageBody: JSON.stringify(tweet),
       QueueUrl:
         "https://sqs.us-east-1.amazonaws.com/703867534834/TweetCommit-VerifiedFollowers",
