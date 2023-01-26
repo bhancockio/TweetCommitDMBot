@@ -3,7 +3,14 @@
     "zip": "zip -r TweetGraphicGenerator.zip .",
     "deploy": "aws lambda update-function-code --function-name TweetGraphicGenerator --zip-file fileb://TweetGraphicGenerator.zip"
   },
+  "name": "tweetgraphicgenerator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
-    "canvas": "^2.11.0"
+    "canvas": "^2.11.0",
+    "fs": "^0.0.1-security"
   }
 }
