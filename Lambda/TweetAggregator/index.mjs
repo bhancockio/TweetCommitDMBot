@@ -27,9 +27,14 @@ export const handler = async (sqsMessage) => {
 
   const tweetsPerDay = countTweetsPerDay(allTweetsForAuthor);
 
+  const tweetsPerDayData = {
+    tweets: tweetsPerDay,
+    authorId: tweet.author_id,
+  };
+
   try {
     const sqsMessageParams = {
-      MessageBody: JSON.stringify(tweetsPerDay),
+      MessageBody: JSON.stringify(tweetsPerDayData),
       QueueUrl:
         "https://sqs.us-east-1.amazonaws.com/703867534834/TweetCommit-AggregatedTweets",
     };

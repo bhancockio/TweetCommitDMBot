@@ -1,0 +1,17 @@
+{
+  "name": "tweetdataprocessing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "zip": "zip -r TweetDataProcessing.zip .",
+    "deploy": "aws lambda update-function-code --function-name TweetDataProcessing --zip-file fileb://TweetDataProcessing.zip"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.259.0",
+    "dayjs": "^1.11.7",
+    "uuid": "^9.0.0"
+  }
+}
