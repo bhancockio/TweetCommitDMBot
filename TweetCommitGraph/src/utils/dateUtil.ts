@@ -37,3 +37,13 @@ const MONTHS: { [key: number]: string } = {
   10: "Nov",
   11: "Dec",
 };
+
+export const convertIndexToWeekIndex = (
+  index: number,
+  numberOfDays: number
+): number => {
+  const DAYS_IN_WEEK = 7;
+  const totalWeeks = Math.ceil(numberOfDays / 7);
+
+  return (index % totalWeeks) * DAYS_IN_WEEK + Math.floor(index / totalWeeks);
+};
