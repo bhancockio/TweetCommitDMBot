@@ -27,13 +27,13 @@ function TweetGraphContainer() {
     const getSortedTweetValues = (tweets: {
       [key: string]: number;
     }): number[] => {
+      console.log(tweets);
       const keys = Object.keys(tweets).sort((a: string, b: string) =>
         dayjs(a).isBefore(dayjs(b)) ? -1 : 1
       );
 
       // Remove the oldest dates to fix into the 7xn grid.
       while (keys.length % 7 !== 0) {
-        console.log("Pop key");
         keys.shift();
       }
 
@@ -43,12 +43,9 @@ function TweetGraphContainer() {
       const values: number[] = [];
       keys.forEach((k) => values.push(tweets[k]));
 
-      console.log("Tweet values", values);
-
       return values;
     };
 
-    console.log("maxtweets", data.maxTweets);
     setMaxTweetsPerDay(data.maxTweets);
     const tweetValues = getSortedTweetValues(data.tweets);
     setTweetValues(tweetValues);

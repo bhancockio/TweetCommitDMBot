@@ -8,19 +8,24 @@ export const getMonthRangeForDates = (
   startDate: string,
   endDate: string
 ): string[] => {
-  const months = new Set<number>();
+  const months = [];
 
-  let start = dayjs(startDate);
-  const end = dayjs(endDate);
+  console.log("Start date", startDate);
+  console.log("End date", endDate);
+  const start = dayjs(startDate);
+  let end = dayjs(endDate);
 
-  while (start.isBefore(end)) {
-    months.add(start.month());
-    start = start.add(1, "d");
+  console.log("diff", end.diff(start, "month"));
+  let durationInMonths = end.diff(start, "month");
+
+  while (durationInMonths > 0) {
+    months.push(MONTHS[end.month()]);
+    end = end.add(1, "month");
+
+    durationInMonths--;
   }
 
-  return Array.from(months)
-    .sort((a, b) => a - b)
-    .map((month) => MONTHS[month]);
+  return months.reverse();
 };
 
 const MONTHS: { [key: number]: string } = {
