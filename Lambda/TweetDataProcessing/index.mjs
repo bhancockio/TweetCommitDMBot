@@ -37,11 +37,6 @@ export const handler = async (aggregatedTweetsData) => {
       body: error,
     };
   }
-
-  return {
-    status: 200,
-    body: "Successfully wrote Tweets to DynamoDB",
-  };
 };
 
 const isValidateTweetData = (aggregatedTweetsData) => {
@@ -51,7 +46,9 @@ const isValidateTweetData = (aggregatedTweetsData) => {
 };
 
 const getTweetMilestoneData = (aggregatedTweets, authorId) => {
-  const milestones = [30, 90, 180, 365];
+  // TODO: Go back and add more milestones later.
+  // const milestones = [30, 90, 180, 365];
+  const milestones = [365];
   const milestoneData = [];
   let maxTweets = 0;
   let tweets = {};
@@ -59,7 +56,6 @@ const getTweetMilestoneData = (aggregatedTweets, authorId) => {
   // Start at today and work backwards 365 day.
   for (let i = 0; i < 365; i++) {
     const newDay = day.subtract(i, "day").format("YYYY-MM-DD");
-    console.log("Day", newDay);
     tweets[newDay] = aggregatedTweets[newDay] ? aggregatedTweets[newDay] : 0;
 
     // Update max tweets
@@ -85,10 +81,11 @@ const getTweetMilestoneData = (aggregatedTweets, authorId) => {
 };
 
 const batchWriteTweetMilestoneData = (tweetMilestoneData) => {
-  const DYNAMODB_TABLE_NAME = "TweetCommit-TweetMilestones";
+  const DYNAMODB_TABLE_NAME = "TweetCommit-Milestones";
   const REGION = "us-east-1";
   const dynamoDBClient = new DynamoDBClient({ region: REGION });
 
+  // TODO: Try to marshall the data
   const params = {
     RequestItems: {
       [DYNAMODB_TABLE_NAME]: tweetMilestoneData.map((data) => ({
@@ -96,10 +93,11 @@ const batchWriteTweetMilestoneData = (tweetMilestoneData) => {
           Item: {
             id: { S: data.id },
             authorId: { S: data.authorId },
-            startDate: { S: data.authorId },
+            startDate: { S: data.startDate },
             endDate: { S: data.endDate },
             tweets: { S: data.tweets },
             maxTweets: { N: data.maxTweets.toString() },
+            createdAt: { S: dayjs().format("YYYY-MM-DD") },
           },
         },
       })),
