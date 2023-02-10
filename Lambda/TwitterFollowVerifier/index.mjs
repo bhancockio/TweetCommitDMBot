@@ -22,6 +22,7 @@ export const handler = async (tweet) => {
   const keyword = "chart";
   const { author_id, text } = tweet;
 
+  // TODO: REMOVE FOR TESTING
   if (!isRequestingChart(text, keyword)) {
     console.log("Not requesting a chart");
     return {
@@ -30,6 +31,7 @@ export const handler = async (tweet) => {
     };
   }
 
+  // TODO: REMOVE FOR TESTING
   const myUserID = process.env.TWITTER_USER_ID;
   const followers = await getAllFollowersForUser(myUserID);
 

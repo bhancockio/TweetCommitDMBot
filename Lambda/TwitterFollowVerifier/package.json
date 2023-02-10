@@ -6,7 +6,7 @@
     "deploy": "aws lambda update-function-code --function-name TwitterFollowVerifier --zip-file fileb://TwitterFollowVerifier.zip"
   },
   "dependencies": {
-    "aws-sdk": "^2.1299.0",
+    "@aws-sdk/client-sqs": "^3.267.0",
     "axios": "^1.2.3",
     "dotenv": "^16.0.3"
   }

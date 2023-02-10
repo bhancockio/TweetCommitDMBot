@@ -77,7 +77,7 @@ const isValidSQSMessage = (sqsMessage) => {
 
 const getTweet = (sqsMessage) => {
   const { Records } = sqsMessage;
-  return JSON.parse(Records[0].body.replaceAll("'", `"`));
+  return JSON.parse(Records[0].body);
 };
 
 const getAllUserTweetsForAuthor = async (authorID) => {
