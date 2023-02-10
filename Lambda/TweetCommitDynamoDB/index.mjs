@@ -10,13 +10,14 @@ export const handler = async (event) => {
     };
   }
 
-  console.log("keys", event.Records[0].dynamodb.Keys);
+  console.log("keys", event.Records[0].dynamodb);
 
-  const dynamodbData = unmarshall(event.Records[0].dynamodb.Keys);
+  const dynamodbData = unmarshall(event.Records[0].dynamodb.NewImage);
 
   const data = {
     url: `https://tweet-commit-dm-bot-f1gf.vercel.app/?milestoneId=${dynamodbData.id}`,
     destinationPath: dynamodbData.id,
+    authorId: dynamodbData.authorId,
   };
 
   return axios

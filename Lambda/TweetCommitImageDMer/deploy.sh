@@ -1,0 +1,1 @@
+aws lambda update-function-code --function-name TweetCommitImageDMer --zip-file fileb://package.zip
