@@ -37,8 +37,6 @@ function TweetGraphContainer() {
         keys.shift();
       }
 
-      console.log("Total tweeets", keys.length);
-
       // Iterate through all keys and populate tweet values
       const values: number[] = [];
       keys.forEach((k) => values.push(tweets[k]));
@@ -62,7 +60,7 @@ function TweetGraphContainer() {
         <div
           key={weekIndex}
           className={
-            "flex h-[30px] w-[30px] items-center justify-center border-2"
+            "flex h-[30px] w-[30px] items-center justify-center border-2 border-white/25"
           }
           style={{
             backgroundColor: getTweetTileBackgroundColor(tweetsForTile),
@@ -76,21 +74,18 @@ function TweetGraphContainer() {
   };
 
   return (
-    <div className="flex h-[900px] w-[1600px] flex-row bg-black px-[20px]">
+    <div className="flex h-[250px] w-[1600px] flex-row bg-black px-[20px]">
       <div className="flex flex-grow flex-col">
         {/* X-AXIS: MONTHS */}
         <div className=" flex flex-row text-white">
           {months.map((month) => (
-            <div className="mx-auto" key={month}>
+            <div className="mx-auto font-mono text-lg font-bold" key={month}>
               {month}
             </div>
           ))}
         </div>
         {/* COMMIT SQUARE GRAPH */}
-        <div className="flex flex-row flex-wrap">
-          {/* TODO: Iterate through the first day in the graph for 52 weeks then go to the next day */}
-          {generateTweetTile()}
-        </div>
+        <div className="flex flex-row flex-wrap">{generateTweetTile()}</div>
       </div>
     </div>
   );
