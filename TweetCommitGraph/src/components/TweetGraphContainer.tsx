@@ -6,28 +6,54 @@ import {
   getCurrentMonth,
   getMonthRangeForDates,
 } from "../utils/dateUtil";
-import { tweetMilestone } from "../utils/dbData";
+import { useRouter } from "next/router";
 
 const SQUARE_BG_COLOR_BASE = "#00FF00";
 
 function TweetGraphContainer() {
-  const [data] = useState<TweetMilestone>(tweetMilestone);
+  const router = useRouter();
+  const { milestoneId } = router.query;
+  const [data, setData] = useState<TweetMilestone | null>(null);
   const [months, setMonths] = useState<string[]>([getCurrentMonth()]);
   const [tweetValues, setTweetValues] = useState([]);
   const [maxTweetsPerDay, setMaxTweetsPerDay] = useState<number>(0);
 
   const getTweetTileBackgroundColor = (tweets: number): string => {
-    const percentage = tweets / maxTweetsPerDay;
-    const hex = (255 * percentage).toString(16);
-    const hexFormatted = hex.split(".")[0].padEnd(2, "0");
+    let percentage = tweets / maxTweetsPerDay;
+    if (tweets > 0) {
+      percentage = Math.max(percentage, 0.15);
+    }
+    const hex = Math.floor(255 * percentage).toString(16);
+    const hexFormatted = hex.padStart(2, "0");
     return SQUARE_BG_COLOR_BASE + hexFormatted;
   };
+
+  useEffect(() => {
+    if (milestoneId) {
+      fetch("/api/milestone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ milestoneId: milestoneId }),
+      })
+        .then((res) => res.json())
+        .then((data: { body: TweetMilestone | null }) => {
+          const tweetMilestone = data.body;
+          if (typeof tweetMilestone === "object") {
+            // Reformat tweets
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            tweetMilestone.tweets = JSON.parse(tweetMilestone.tweets as string);
+            setData(tweetMilestone);
+          } else {
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [milestoneId]);
 
   useEffect(() => {
     const getSortedTweetValues = (tweets: {
       [key: string]: number;
     }): number[] => {
-      console.log(tweets);
       const keys = Object.keys(tweets).sort((a: string, b: string) =>
         dayjs(a).isBefore(dayjs(b)) ? -1 : 1
       );
@@ -44,10 +70,18 @@ function TweetGraphContainer() {
       return values;
     };
 
-    setMaxTweetsPerDay(data.maxTweets);
-    const tweetValues = getSortedTweetValues(data.tweets);
-    setTweetValues(tweetValues);
-    setMonths(getMonthRangeForDates(data.startDate, data.endDate));
+    if (data) {
+      const tweetValues = getSortedTweetValues(
+        data.tweets as { [key: string]: number }
+      );
+      setMaxTweetsPerDay(data.maxTweets);
+      setTweetValues(tweetValues);
+      setMonths(getMonthRangeForDates(data.startDate, data.endDate));
+    } else {
+      setMaxTweetsPerDay(0);
+      setTweetValues([]);
+      setMonths([]);
+    }
   }, [data]);
 
   const generateTweetTile = () => {

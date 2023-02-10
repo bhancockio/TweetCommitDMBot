@@ -3,9 +3,8 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 export const handler = async (request) => {
   const { milestoneId } = request;
-  console.log("request", request);
   console.log("milestoneId", milestoneId);
-  if (!isValidMilestoneId(milestoneId)) {
+  if (!milestoneId) {
     return {
       statusCode: 400,
       body: JSON.stringify("Invalid request"),
@@ -34,10 +33,6 @@ export const handler = async (request) => {
       body: JSON.stringify("Error fetching milestone"),
     };
   }
-};
-
-const isValidMilestoneId = (milestoneId) => {
-  return true;
 };
 
 const fetchTweetMilestone = (milestoneId) => {

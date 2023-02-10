@@ -10,12 +10,9 @@ export const getMonthRangeForDates = (
 ): string[] => {
   const months = [];
 
-  console.log("Start date", startDate);
-  console.log("End date", endDate);
   const start = dayjs(startDate);
   let end = dayjs(endDate);
 
-  console.log("diff", end.diff(start, "month"));
   let durationInMonths = end.diff(start, "month");
 
   while (durationInMonths > 0) {
