@@ -39,6 +39,7 @@ const getRule = () => {
     json: true,
   };
   return get(requestConfig).then((resp) => {
+    console.log(resp);
     const data = resp.data.data;
     console.log(data);
     return data;
@@ -79,3 +80,5 @@ module.exports = {
   deleteRule,
   deleteAllRules,
 };
+
+getRule();

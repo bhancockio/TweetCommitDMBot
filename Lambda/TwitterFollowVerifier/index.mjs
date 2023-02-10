@@ -19,17 +19,7 @@ export const handler = async (tweet) => {
     };
   }
 
-  const keyword = "chart";
   const { author_id, text } = tweet;
-
-  // TODO: REMOVE FOR TESTING
-  if (!isRequestingChart(text, keyword)) {
-    console.log("Not requesting a chart");
-    return {
-      statusCode: 400,
-      body: "Not requesting a chart",
-    };
-  }
 
   // TODO: REMOVE FOR TESTING
   const myUserID = process.env.TWITTER_USER_ID;
@@ -89,10 +79,6 @@ const isValidTweet = (tweet) => {
     return false;
 
   return true;
-};
-
-const isRequestingChart = (text, keyword) => {
-  return text.toLowerCase().includes(keyword.toLowerCase());
 };
 
 const getAllFollowersForUser = async (userID) => {

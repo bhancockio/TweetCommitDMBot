@@ -15,12 +15,14 @@ export const getMonthRangeForDates = (
 
   let durationInMonths = end.diff(start, "month");
 
-  while (durationInMonths > 0) {
+  while (durationInMonths >= 0) {
     months.push(MONTHS[end.month()]);
-    end = end.add(1, "month");
+    end = end.add(-1, "month");
 
     durationInMonths--;
   }
+
+  console.log("Months", months);
 
   return months.reverse();
 };

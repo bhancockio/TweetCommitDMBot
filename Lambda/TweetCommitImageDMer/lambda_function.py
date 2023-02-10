@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         # upload media
         media = api.media_upload(filename=download_path)
         recipient_id = authorId  # ID of the user
-        api.send_direct_message(recipient_id=recipient_id, text='Thank You!', attachment_type='media', attachment_media_id=media.media_id)
+        api.send_direct_message(recipient_id=recipient_id, text='Hey there! Thank you for following me and tyring out Tweet Commit Graph Generator! Also, I plan on creating more cool projects in the future so I am excited to have you along for the the ride. If you have any questions, let me know! ', attachment_type='media', attachment_media_id=media.media_id)
 
         print("CONTENT TYPE: " + response['ContentType'])
         return response['ContentType']
