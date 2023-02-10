@@ -1,0 +1,16 @@
+{
+  "name": "tweetcommitdynamodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "zip": "zip -r TweetCommitDynamoDB.zip .",
+    "deploy": "aws lambda update-function-code --function-name TweetCommitDynamoDB --zip-file fileb://TweetCommitDynamoDB.zip"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/util-dynamodb": "^3.267.0",
+    "axios": "^1.3.2"
+  }
+}
