@@ -5,9 +5,11 @@ import {
   BatchWriteItemCommand,
 } from "@aws-sdk/client-dynamodb";
 
-export const handler = async (aggregatedTweetsData) => {
+export const handler = async (sqsMessage) => {
+  console.log("Incoming SQS Message: ", sqsMessage);
+
   console.log("Processing data");
-  if (!isValidateTweetData(aggregatedTweetsData)) {
+  if (!isValidSQSMessage(sqsMessage)) {
     const message = "Invalid Tweet data.";
     console.error(message);
     return {
@@ -15,6 +17,8 @@ export const handler = async (aggregatedTweetsData) => {
       body: message,
     };
   }
+
+  const aggregatedTweetsData = getAggregatedTweetData(sqsMessage);
 
   const tweetMilestoneData = getTweetMilestoneData(
     aggregatedTweetsData.tweets,
@@ -39,10 +43,22 @@ export const handler = async (aggregatedTweetsData) => {
   }
 };
 
-const isValidateTweetData = (aggregatedTweetsData) => {
-  if (Object.keys(aggregatedTweetsData.tweets).length === 0) return false;
-  if (!aggregatedTweetsData.authorId) return false;
+const isValidSQSMessage = (sqsMessage) => {
+  const { Records } = sqsMessage;
+  if (
+    !Records ||
+    !Array.isArray(Records) ||
+    !Records.length === 1 ||
+    !Records[0].body
+  )
+    return false;
+
   return true;
+};
+
+const getAggregatedTweetData = (sqsMessage) => {
+  const { Records } = sqsMessage;
+  return JSON.parse(Records[0].body.replaceAll("'", `"`));
 };
 
 const getTweetMilestoneData = (aggregatedTweets, authorId) => {
