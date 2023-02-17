@@ -8,7 +8,7 @@ const get = util.promisify(request.get);
 const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
 const BASE_URL = "https://api.twitter.com/2/tweets/search/stream/rules";
 
-// Create rules
+// Documentation: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule
 const createRule = (rules) => {
   const requestConfig = {
     url: BASE_URL,
@@ -29,7 +29,6 @@ const createRule = (rules) => {
     });
 };
 
-// Get rules
 const getRule = () => {
   const requestConfig = {
     url: BASE_URL,
@@ -46,7 +45,6 @@ const getRule = () => {
   });
 };
 
-// Delete rules
 const deleteRule = (ids) => {
   const requestConfig = {
     url: BASE_URL,
@@ -74,11 +72,7 @@ const deleteAllRules = async () => {
   remove(ruleIds);
 };
 
-module.exports = {
-  createRule,
-  getRule,
-  deleteRule,
-  deleteAllRules,
-};
-
-getRule();
+const rulesToCreate = [{ value: "#BrandonHancock" }];
+createRule(rulesToCreate);
+// getRule();
+// deleteAllRules()
