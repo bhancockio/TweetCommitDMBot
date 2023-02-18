@@ -19,9 +19,9 @@ const createRule = (rules) => {
       add: rules,
     },
   };
-  return post(requestConfig)
+  post(requestConfig)
     .then((resp) => {
-      console.log(resp.data);
+      console.log(resp.body);
     })
     .catch((err) => {
       console.error("Error posting rule");
@@ -37,12 +37,17 @@ const getRule = () => {
     },
     json: true,
   };
-  return get(requestConfig).then((resp) => {
-    console.log(resp);
-    const data = resp.data.data;
-    console.log(data);
-    return data;
-  });
+  return get(requestConfig)
+    .then((resp) => {
+      console.log(resp.body.data);
+      return resp.body.data;
+      // const data = resp.data.data;
+      // console.log(data);
+      // return data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const deleteRule = (ids) => {
@@ -57,10 +62,14 @@ const deleteRule = (ids) => {
       },
     },
   };
-  return post(requestConfig).catch((err) => {
-    console.error("Error deleting");
-    console.error(err);
-  });
+  post(requestConfig)
+    .then((resp) => {
+      console.log(resp.body);
+    })
+    .catch((err) => {
+      console.error("Error deleting");
+      console.error(err);
+    });
 };
 
 const deleteAllRules = async () => {
