@@ -4,8 +4,9 @@
 
 require("dotenv").config();
 
-const request = require("request");
-const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
+// API CALLS
+const request = require("request"); // Used for API calls
+const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN; // Need Bearer Token to make authenticated calls to Twitter API
 const streamURL =
   "https://api.twitter.com/2/tweets/search/stream?expansions=author_id";
 const config = {
@@ -17,19 +18,20 @@ const config = {
 };
 
 let timeout = 0;
-
 const sleep = async (delay) => {
   return new Promise((resolve) => setTimeout(() => resolve(true), delay));
 };
 
+// Event Emitter
 const streamTweets = (tweetEmitter) => {
   try {
+    // Start listenting to data from the Twitter Stream
     const stream = request.get(config);
 
     stream
       .on("data", (data) => {
         try {
-          // Reset timeout b/c we've successfully connected
+          // Reset timeout because we've successfully connected
           timeout = 0;
           const json = JSON.parse(data);
           if (json.connection_issue) {
