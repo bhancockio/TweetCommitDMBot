@@ -102,7 +102,6 @@ const batchWriteTweetMilestoneData = (tweetMilestoneData) => {
   const REGION = "us-east-1";
   const dynamoDBClient = new DynamoDBClient({ region: REGION });
 
-  // TODO: Try to marshall the data
   const params = {
     RequestItems: {
       [DYNAMODB_TABLE_NAME]: tweetMilestoneData.map((data) => ({
