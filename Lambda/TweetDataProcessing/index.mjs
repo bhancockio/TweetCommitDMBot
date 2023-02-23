@@ -4,6 +4,7 @@ import {
   DynamoDBClient,
   BatchWriteItemCommand,
 } from "@aws-sdk/client-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
 
 export const handler = async (sqsMessage) => {
   console.log("Incoming SQS Message: ", sqsMessage);
@@ -106,15 +107,10 @@ const batchWriteTweetMilestoneData = (tweetMilestoneData) => {
     RequestItems: {
       [DYNAMODB_TABLE_NAME]: tweetMilestoneData.map((data) => ({
         PutRequest: {
-          Item: {
-            id: { S: data.id },
-            authorId: { S: data.authorId },
-            startDate: { S: data.startDate },
-            endDate: { S: data.endDate },
-            tweets: { S: data.tweets },
-            maxTweets: { N: data.maxTweets.toString() },
-            createdAt: { S: dayjs().format("YYYY-MM-DD") },
-          },
+          Item: marshall({
+            ...data,
+            createdAt: dayjs().format("YYYY-MM-DD"),
+          }),
         },
       })),
     },

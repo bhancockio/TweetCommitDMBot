@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.259.0",
+    "@aws-sdk/util-dynamodb": "^3.276.0",
     "dayjs": "^1.11.7",
     "uuid": "^9.0.0"
   }
