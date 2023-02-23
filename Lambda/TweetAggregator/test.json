@@ -1,0 +1,14 @@
+{
+  "Records": [
+    {
+      "messageId": "81b97fe8-7e5b-42c6-b06e-c9fd9b92b840",
+      "receiptHandle": "AQEBrCDxzey93OwnppFoc75JOMk2gqWSgDcGJfaNcxQ+LKVXSDlpNkhtlxGnL2qdDu2OwlKL6EvQ0PvLX05BKwd9hHLR2C6Y+kUOMtQI9WcH+9ppD/748QO+EIVlZpVzw/2JAL5e5dkBGFEyGw/qvWVBHbA7Hl8aNh4c5wiuS62B/wilrgVO6Wa2u5T/lYkznxSMMjs8ihOMkWMzxW0NEIuiT++JrMtQPqSwEUSdG2UlMwlJ1v9/VRnzpEuJecqEJz9vv2n/imeCFruol8om6FH7MfItZ7cgAYztkJGkzxx/WeuGKyiSBr8Yx19MUx6RzqqUy5dFeUaat7LM+JmDNOnThNyqMGfkecNMu351B2blltSeIgMTB0l4d2FsQkQP6BAXIbXXqWFh4nlrOwIJCNsFQprGKhp5kVwtKB4W4L/Hipk=",
+      "body": "{'author_id':'1453842943580811267','edit_history_tweet_ids':['1616860790182776832'],'id':'1616860790182776832','text':'@jarekceborski All of them… chart'}",
+      "messageAttributes": {},
+      "md5OfBody": "25ea9198174efeb10bacc945a65267d1",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:703867534834:TweetCommit-VerifiedFollowers",
+      "awsRegion": "us-east-1"
+    }
+  ]
+}
