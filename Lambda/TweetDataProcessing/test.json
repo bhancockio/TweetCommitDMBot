@@ -1,0 +1,14 @@
+{
+  "Records": [
+    {
+      "messageId": "81b97fe8-7e5b-42c6-b06e-c9fd9b92b840",
+      "receiptHandle": "AQEBrCDxzey93OwnppFoc75JOMk2gqWSgDcGJfaNcxQ+LKVXSDlpNkhtlxGnL2qdDu2OwlKL6EvQ0PvLX05BKwd9hHLR2C6Y+kUOMtQI9WcH+9ppD/748QO+EIVlZpVzw/2JAL5e5dkBGFEyGw/qvWVBHbA7Hl8aNh4c5wiuS62B/wilrgVO6Wa2u5T/lYkznxSMMjs8ihOMkWMzxW0NEIuiT++JrMtQPqSwEUSdG2UlMwlJ1v9/VRnzpEuJecqEJz9vv2n/imeCFruol8om6FH7MfItZ7cgAYztkJGkzxx/WeuGKyiSBr8Yx19MUx6RzqqUy5dFeUaat7LM+JmDNOnThNyqMGfkecNMu351B2blltSeIgMTB0l4d2FsQkQP6BAXIbXXqWFh4nlrOwIJCNsFQprGKhp5kVwtKB4W4L/Hipk=",
+      "body": "{'authorId':'brandon_io','tweets':{'2023-01-23':1,'2023-01-22':17,'2023-01-20':32,'2023-01-19':52,'2023-01-18':17,'2023-01-17':31,'2023-01-16':28,'2023-01-15':23,'2023-01-14':14,'2023-01-13':43,'2023-01-12':26,'2023-01-11':28,'2023-01-10':28,'2023-01-09':28,'2023-01-08':28,'2023-01-07':31,'2023-01-06':53,'2023-01-05':43,'2023-01-04':39,'2023-01-03':3,'2023-01-02':10,'2023-01-01':2,'2022-12-31':6,'2022-12-25':2,'2022-12-24':2,'2022-12-23':1,'2022-12-22':13,'2022-12-11':1,'2022-12-09':3,'2022-12-08':3,'2022-12-07':1,'2022-12-06':12,'2022-12-03':1,'2022-12-01':12,'2022-11-29':1,'2022-11-26':2,'2022-11-21':1,'2022-11-19':1,'2022-08-07':1,'2022-07-19':1,'2022-07-07':1,'2022-06-23':5,'2022-06-21':1,'2022-06-13':1,'2022-05-20':1,'2022-05-13':9,'2022-05-09':1,'2022-05-03':1,'2022-04-12':1,'2022-04-06':1,'2022-04-03':2,'2022-04-01':1,'2022-03-31':1,'2022-03-30':2,'2022-03-29':2,'2022-03-28':1,'2022-03-27':2,'2022-03-26':6,'2022-03-25':6,'2022-03-24':6,'2022-03-23':1,'2022-03-22':1}}",
+      "messageAttributes": {},
+      "md5OfBody": "25ea9198174efeb10bacc945a65267d1",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:703867534834:TweetCommit-VerifiedFollowers",
+      "awsRegion": "us-east-1"
+    }
+  ]
+}
