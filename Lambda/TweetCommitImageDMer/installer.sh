@@ -1,0 +1,1 @@
+pip install --target ./package dotenv boto3 tweepy
